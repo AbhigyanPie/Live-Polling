@@ -163,7 +163,7 @@ app.post('/api/teacher', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 server.listen(PORT, () => {
     console.log(`Backend server running on ${PORT}`);
 });
