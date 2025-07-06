@@ -2,7 +2,7 @@
 
 A robust, real-time web application for interactive classroom polling, enabling seamless engagement between teachers and students. Built with React, Redux, Express.js, Supabase, and Socket.IO, the platform ensures instant updates, per-tab user isolation, and a modern, intuitive interface.
 
-# Hosted-link : https://live-polling-2ree.vercel.app/
+Hosted-link : https://live-polling-2ree.vercel.app/
 ---
 
 ## 🚀 Features & Data Flow
