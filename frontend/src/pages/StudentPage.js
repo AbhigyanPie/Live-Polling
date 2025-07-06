@@ -10,7 +10,6 @@ import {
   setPolls,
   addPoll,
 } from '../redux/pollSlice';
-import { addStudent } from '../api/studentApi';
 import PollHistory from './PollHistory';
 import io from 'socket.io-client';
 import '../css/student-loader.css';
@@ -135,8 +134,8 @@ const StudentPage = () => {
 
   if (showResults) {
     return (
-      <div>
-        <h2>Poll Results</h2>
+      <div className="poll-card">
+        <h2 className="poll-title">Poll Results</h2>
         {results.map((result, idx) => (
           <div key={idx} className="poll-result-block">
             <div className="poll-result-header">
@@ -160,24 +159,37 @@ const StudentPage = () => {
   }
 
   return (
-    <div>
-      <h2>Question {currentIndex + 1} of {unansweredPolls.length}</h2>
-      <h3>{poll.question}</h3>
+    <div className="poll-card">
+      <div className="poll-header-row">
+        <span className="poll-badge">Live Poll</span>
+        <span className="poll-progress">
+          Question {currentIndex + 1} of {unansweredPolls.length}
+        </span>
+      </div>
+      <h3 className="poll-question">{poll.question}</h3>
       <form onSubmit={e => { e.preventDefault(); handleAnswer(); }}>
-        {options.map((opt, idx) => (
-          <label key={idx} className="option-label">
-            <input
-              type="radio"
-              name="answer"
-              value={opt}
-              checked={selectedAnswer === opt}
-              onChange={() => dispatch(setSelectedAnswer(opt))}
-              required
-            />
-            {opt}
-          </label>
-        ))}
-        <button type="submit" disabled={loading || !selectedAnswer}>Submit</button>
+        <div className="poll-options">
+          {options.map((opt, idx) => (
+            <label key={idx} className="poll-option-label">
+              <input
+                type="radio"
+                name="answer"
+                value={opt}
+                checked={selectedAnswer === opt}
+                onChange={() => dispatch(setSelectedAnswer(opt))}
+                required
+              />
+              <span className="poll-option-text">{opt}</span>
+            </label>
+          ))}
+        </div>
+        <button
+          type="submit"
+          className="poll-submit-btn"
+          disabled={loading || !selectedAnswer}
+        >
+          {loading ? 'Submitting...' : 'Submit'}
+        </button>
       </form>
     </div>
   );
