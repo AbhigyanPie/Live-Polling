@@ -1,0 +1,172 @@
+.student-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.loader-circle {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #7c3aed;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.waiting-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+}
+
+.poll-history {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-top: 2rem;
+  padding-right: 1rem;
+}
+
+.poll-history-block {
+  background: #f8f8fa;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.poll-history-header {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.poll-history-question-text {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.poll-result-block {
+  margin-bottom: 1rem;
+}
+
+.poll-result-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.option-number {
+  background: #7c3aed;
+  color: #fff;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+}
+
+.option-text {
+  flex: 1;
+  color: #22223b;
+}
+
+.option-percentage {
+  font-weight: 600;
+  color: #7c3aed;
+  margin-left: 1rem;
+}
+
+.poll-bar-outer {
+  background: #e0e0e0;
+  border-radius: 8px;
+  height: 1.2rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.poll-bar-inner {
+  background: #7c3aed;
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+  transition: width 0.5s;
+}
+
+.next-question-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #4CAF50;
+  transition: all 0.3s ease;
+}
+
+.timer-display {
+  margin-left: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+}
+
+.timer-warning {
+  background-color: #fff3cd;
+  border-color: #ffc107;
+  color: #856404;
+  animation: pulse 1s infinite;
+}
+
+.timer-expired {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+  animation: none;
+}
+
+.timer-status {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.time-up-message {
+  text-align: center;
+  padding: 15px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin: 10px 0;
+  color: #721c24;
+  font-weight: bold;
+}
