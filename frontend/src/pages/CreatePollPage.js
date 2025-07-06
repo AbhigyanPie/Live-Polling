@@ -55,8 +55,41 @@ const CreatePollPage = () => {
 
   return (
     <form onSubmit={handleSubmit} className="poll-form">
-      <input value={question} onChange={e =>
-        setQuestion(e.target.value)} placeholder="Poll question" required />
+      <div className="create-logo-row">
+        <span className="create-form-badge">Intervue Poll</span>
+      </div>
+      <h2 className="create-poll-title">
+        Let’s <span className="highlight">Get Started</span>
+      </h2>
+      <p className="create-poll-desc">
+        you’ll have the ability to create and manage polls, ask questions, and monitor your students' responses in real-time.
+      </p>
+      <div className="question-row">
+        <h3 className="question-heading">Enter your question</h3>
+        <div className="timer-inline">
+          <span>Timer:</span>
+          <select
+            value={duration}
+            onChange={e => setDuration(e.target.value)}
+            required
+            className="timer-dropdown"
+          >
+            <option value="" disabled>Select timer</option>
+            <option value="10">10 seconds</option>
+            <option value="20">20 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="45">45 seconds</option>
+            <option value="60">60 seconds</option>
+          </select>
+        </div>
+      </div>
+      <input
+        value={question}
+        onChange={e => setQuestion(e.target.value)}
+        placeholder="Enter your question"
+        required
+        className="poll-question-input"
+      />
       {options.map((opt, idx) => (
         <div key={idx} className="option-row">
           <input
@@ -64,9 +97,10 @@ const CreatePollPage = () => {
             onChange={e => handleOptionChange(idx, e.target.value)}
             placeholder={`Option ${idx + 1}`}
             required
+            className="poll-option-input"
           />
-          <label>
-            Correct?
+          <label className="correct-label">
+            <span>Is it Correct?</span>
             <input
               type="checkbox"
               checked={correctOptions[idx]}
@@ -75,24 +109,12 @@ const CreatePollPage = () => {
           </label>
         </div>
       ))}
-      <button type="button" onClick={addOptions}>+ Add More Option</button>
-      <label>
-        Timer:
-        <select
-          value={duration}
-          onChange={e => setDuration(e.target.value)}
-          required
-          className="timer-dropdown"
-        >
-          <option value="" disabled>Select timer</option>
-          <option value="10">10 seconds</option>
-          <option value="20">20 seconds</option>
-          <option value="30">30 seconds</option>
-          <option value="45">45 seconds</option>
-          <option value="60">60 seconds</option>
-        </select>
-      </label>
-      <button type="submit">Submit Poll</button>
+      <button type="button" className="add-option-btn" onClick={addOptions}>
+        + Add More option
+      </button>
+      <button type="submit" className="ask-question-btn">
+        Ask Question
+      </button>
     </form>
   );
 };

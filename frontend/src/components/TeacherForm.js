@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setTeacher } from '../redux/teacherSlice.js';
+import './components.css';
 
 const TeacherForm = () => {
   const navigate = useNavigate();
@@ -36,26 +37,42 @@ const TeacherForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="teacher-form">
-      <h2>Enter Teacher Details</h2>
-      <input
-        type="text"
-        value={name}
-        onChange={e => setName(e.target.value)}
-        placeholder="Name"
-        required
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <button type="submit" disabled={loading}>
-        {loading ? 'Registering...' : 'Continue'}
-      </button>
-    </form>
+    <div className="teacher-form-bg">
+      <form className="teacher-form-card" onSubmit={handleSubmit}>
+        <div className="teacher-form-logo-row">
+          <span className="teacher-form-badge">Intervue Poll</span>
+        </div>
+        <h2 className="teacher-form-title">
+          Let’s <span className="highlight">Get Started</span>
+        </h2>
+        <p className="teacher-form-desc">
+          Enter your details to create and manage live polls for your class.
+        </p>
+        <label className="teacher-form-label" htmlFor="teacher-name">Name</label>
+        <input
+          id="teacher-name"
+          className="teacher-input"
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="Your Name"
+          required
+        />
+        <label className="teacher-form-label" htmlFor="teacher-email">Email</label>
+        <input
+          id="teacher-email"
+          className="teacher-input"
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          required
+        />
+        <button className="teacher-btn" type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Continue'}
+        </button>
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import RoleSelector from './components/RoleSelector';
+import StudentForm from './components/StudentForm';
 import StudentPage from './pages/StudentPage';
 import TeacherPage from './pages/TeacherPage';
 import CreatePollPage from './pages/CreatePollPage';
@@ -15,7 +16,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path ="/" element={<RoleSelector/>} />
-        <Route path ="/student" element={<StudentPage/>} />
+        <Route path="/student" element={<StudentForm />} />
+        <Route path="/student/page" element={<StudentPage />} />
         <Route path ="/teacher" 
                   element={
                     localStorage.getItem('teacher')

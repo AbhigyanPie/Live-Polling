@@ -31,7 +31,6 @@ const StudentPage = () => {
   const { name, id, tabId, selectedAnswer } = useSelector((state) => state.student);
   const { polls } = useSelector((state) => state.poll);
 
-  const [submitted, setSubmitted] = useState(false);
   const [answeredPollIds, setAnsweredPollIds] = useState(() => {
     const saved = sessionStorage.getItem('answeredPollIds');
     return saved ? JSON.parse(saved) : [];
@@ -40,7 +39,6 @@ const StudentPage = () => {
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [inputName, setInputName] = useState('');
 
   useEffect(() => {
     const savedName = sessionStorage.getItem('studentName');
@@ -50,13 +48,10 @@ const StudentPage = () => {
     if (savedName && savedId) {
       dispatch(setStudentName(savedName));
       dispatch(setStudentId(savedId));
-      setSubmitted(true);
     }
   }, [dispatch]);
 
   useEffect(() => {
-    if (!submitted) return;
-
     fetch(`${process.env.REACT_APP_API_BASE_URL}/api/active-polls`)
       .then(res => res.json())
       .then(data => dispatch(setPolls(data.polls || [])));
@@ -74,27 +69,12 @@ const StudentPage = () => {
     return () => {
       socket.off('new_poll', handleNewPoll);
     };
-  }, [submitted, answeredPollIds.length, polls.length, dispatch, polls, answeredPollIds.length]);
+  }, [answeredPollIds.length, polls.length, dispatch, polls, answeredPollIds.length]);
 
   const unansweredPolls = Array.isArray(polls)
     ? polls.filter(poll => !answeredPollIds.includes(poll.id))
     : [];
   const poll = unansweredPolls[0];
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!inputName.trim()) return;
-    try {
-      const student = await addStudent(inputName);
-      sessionStorage.setItem('studentName', student.name);
-      sessionStorage.setItem('studentId', student.id);
-      dispatch(setStudentName(student.name));
-      dispatch(setStudentId(student.id));
-      setSubmitted(true);
-    } catch (err) {
-      alert(err.message || 'Error saving student');
-    }
-  };
 
   const handleAnswer = async () => {
     setLoading(true);
@@ -125,21 +105,6 @@ const StudentPage = () => {
     setResults([]);
     setCurrentIndex(idx => idx + 1);
   };
-
-  if (!submitted) {
-    return (
-      <form onSubmit={handleSubmit}>
-        <label>Enter Your Name:</label>
-        <input
-          type="text"
-          value={inputName}
-          onChange={(e) => setInputName(e.target.value)}
-          required
-        />
-        <button type="submit">Submit</button>
-      </form>
-    );
-  }
 
   if (!polls || polls.length === 0) {
     return (
